@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS admin CASCADE;
+
+CREATE TABLE admin (
+  id SERIAL PRIMARY KEY,
+  admin_email VARCHAR(255) NOT NULL,
+  admin_password VARCHAR(255) NOT NULL
+);

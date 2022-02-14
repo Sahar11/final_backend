@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS checkin CASCADE;
+
+CREATE TABLE checkin (
+  id SERIAL PRIMARY KEY,
+  patient_id integer REFERENCES patients(id) ON DELETE CASCADE NOT NULL,
+ message VARCHAR(255) NOT NULL
+);
