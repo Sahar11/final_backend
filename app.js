@@ -9,7 +9,9 @@ const {ENVIROMENT, PORT} = process.env;
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const dbHelpers = require('./helpers/dbHelpers')(db);
 const patientRoutes = require('./routes/patients');
+const labRoutes = require('./routes/lab');
 //route import
 const app = express();
 app.use(cors());
@@ -20,10 +22,9 @@ app.use(morgan(ENVIROMENT));
 app.use(bodyParser.json());
 
 //router
-app.use("/patient", patientRoutes());
-// app.get('/', (req, res) => {
-// 	res.json({greetings: 'hello world'});
-// });
+app.use("/patient", patientRoutes(db));
+app.use("/lab", labRoutes(db));
+
 
 app.get('/', async (req, res) => {
   try {
@@ -34,6 +35,7 @@ app.get('/', async (req, res) => {
       console.log(err);
   }
 });
+
 
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
