@@ -7,6 +7,7 @@ const db = pgp(connectionString)
 const cors = require('cors');
 const {ENVIROMENT, PORT} = process.env;
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const dbHelpers = require('./helpers/dbHelpers')(db);
@@ -16,10 +17,13 @@ const labRoutes = require('./routes/lab');
 const app = express();
 app.use(cors());
 
+// view engine setup
+//app.set('views', path.join(__dirname, 'views'));
 
 // middleware setup
 app.use(morgan(ENVIROMENT));
 app.use(bodyParser.json());
+app.use(fileUpload());
 
 //router
 app.use("/patient", patientRoutes(db));
