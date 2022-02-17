@@ -13,7 +13,7 @@ module.exports = (db, path) => {
   console.log("Req.Body: ",req.body);
 
   const fileupload = req.files.file;
-  console.log("File object ",fileupload);
+  //console.log("File object ",fileupload);
 
   fileName = fileupload.name;
  console.log(fileName);
@@ -22,11 +22,11 @@ module.exports = (db, path) => {
       return res.status(500).send(err);
     }
   })
-
+const filePath = path.join(__dirname+ '/../public', 'images/')+fileName;
 try {
   const results = await db.query(
       `INSERT INTO reports (patient_id, patient_name, patient_healthcard, report, test_type, date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *` ,
-      [patient_id, fullname, health, fileName, test, date]
+      [patient_id, fullname, health, filePath, test, date]
     );
     res.json(results)
   } catch (err) {
