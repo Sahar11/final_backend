@@ -6,10 +6,10 @@ module.exports = (db) => {
   // all routes will go here 
   router.get('/', async (req, res) => {
 
-    console.log("YESSSSSSS")
+    //console.log("YESSSSSSS")
     try {
   
-        const results = await db.query("SELECT * FROM reports WHERE patient_name = 'Caroline' ");
+        const results = await db.query("SELECT * FROM reports WHERE patient_name = 'rtttt' ");
         res.json(results);
     } catch (err) {
         console.log(err);
