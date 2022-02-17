@@ -8,6 +8,7 @@ const cors = require('cors');
 const {ENVIROMENT, PORT} = process.env;
 const express = require('express');
 const fileUpload = require('express-fileupload');
+const path = require("path");
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const dbHelpers = require('./helpers/dbHelpers')(db);
@@ -18,7 +19,7 @@ const app = express();
 app.use(cors());
 
 // view engine setup
-//app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 
 // middleware setup
 app.use(morgan(ENVIROMENT));
@@ -27,7 +28,7 @@ app.use(fileUpload());
 
 //router
 app.use("/patient", patientRoutes(db));
-app.use("/lab", labRoutes(db));
+app.use("/lab", labRoutes(db, path));
 
 
 app.get('/', async (req, res) => {
