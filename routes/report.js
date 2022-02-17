@@ -9,7 +9,7 @@ module.exports = (db) => {
     console.log("YESSSSSSS")
     try {
   
-        const results = await db.query('SELECT * FROM reports');
+        const results = await db.query("SELECT * FROM reports WHERE patient_name = 'rtttt' ");
         res.json(results);
     } catch (err) {
         console.log(err);
