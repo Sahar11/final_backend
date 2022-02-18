@@ -23,7 +23,6 @@ module.exports = (db) => {
   });
   router.get('/download/:id', async (req, res) => {
 
-    
     try {
   
         const results = await db.query("SELECT * FROM reports WHERE id = $1 LIMIT 1 ", [req.params.id]) ;
