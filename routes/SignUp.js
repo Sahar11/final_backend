@@ -21,22 +21,22 @@ module.exports = ({ addUser, getUserByEmail }) => {
             user.healthcard === "" ||
             user.dob === "" ||
             user.email === " " ||
-    ) {
-            return res.statusCode(400).send("Please fill in all the required fields");
-        }
-
-        getUserByEmail(user.email)
-            .then((response) => {
-                if (response) {
-                    res.json({
-                        msg: "Account with this email address already exists",
-                    });
-                } else {
-                    return addUser(user);
-                }
+            {
+                return: res.statusCode(400).send("Please fill in all the required fields")
             })
-            .then((newUser) => res.json(newUser))
-            .catch((err) => res.json({ error: err.message }));
+
+            getUserByEmail(user.email)
+                .then((response) => {
+                    if (response) {
+                        res.json({
+                            msg: "Account with this email address already exists",
+                        });
+                    } else {
+                        return addUser(user);
+                    }
+                })
+                .then((newUser) => res.json(newUser))
+                .catch((err) => res.json({ error: err.message }));
 
     });
     return router;
