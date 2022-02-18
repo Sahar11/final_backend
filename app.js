@@ -11,8 +11,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
 const patientRoutes = require('./routes/patients');
-const reportRoutes = require('./routes/report')
-
+const reportRoutes = require('./routes/report');
+const locationRoutes = require('./routes/labLocation');
 //route import
 const app = express();
 app.use(cors());
@@ -26,6 +26,7 @@ app.use(express.static('public/images'))
 //router
 app.use("/patient", patientRoutes());
 app.use("/report", reportRoutes(db));
+app.use("/location", locationRoutes(db));
 // app.get('/', (req, res) => {
 // 	res.json({greetings: 'hello world'});
 // });
