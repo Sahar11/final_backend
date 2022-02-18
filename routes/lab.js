@@ -26,7 +26,7 @@ const filePath = path.join(__dirname+ '/../public', 'images/')+fileName;
 try {
   const results = await db.query(
       `INSERT INTO reports (patient_id, patient_name, patient_healthcard, report, test_type, date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *` ,
-      [patient_id, fullname, health, filePath, test, date]
+      [patient_id, fullname, health, fileName, test, date]
     );
     res.json(results)
   } catch (err) {
