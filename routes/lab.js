@@ -8,7 +8,7 @@ module.exports = (db, path) => {
   router.post('/', async (req, res) => {
 
   const {
-    patient_id, fullname, health, file, test, date
+    fullname, health, file, test, date
   } = req.body;
   console.log("Req.Body: ",req.body);
 
@@ -25,8 +25,8 @@ module.exports = (db, path) => {
 const filePath = path.join(__dirname+ '/../public', 'images/')+fileName;
 try {
   const results = await db.query(
-      `INSERT INTO reports (patient_id, patient_name, patient_healthcard, report, test_type, date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *` ,
-      [patient_id, fullname, health, fileName, test, date]
+      `INSERT INTO reports (patient_name, patient_healthcard, report, test_type, date) VALUES ($1, $2, $3, $4, $5) RETURNING *` ,
+      [fullname, health, fileName, test, date]
     );
     res.json(results)
   } catch (err) {
