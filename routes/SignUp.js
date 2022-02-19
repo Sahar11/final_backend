@@ -14,13 +14,9 @@ module.exports = ({ addUser, getUserByEmail }) => {
             email,
 
         };
-        console.log(user)
-        if (
-            user.first_name === "" ||
-            user.last_name === "" ||
-            user.healthcard === "" ||
-            user.dob === "" ||
-            user.email === " " ||
+        console.log(user);
+        
+        if(user.first_name === "" || user.last_name === "" ||user.healthcard === "" ||user.dob === "" || user.email === " "
     ) {
             return res.statusCode(400).send("Please fill in all the required fields");
         }

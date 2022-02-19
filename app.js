@@ -10,7 +10,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const patientRoutes = require('./routes/patients');
-const loginRoutes = require('./routes/login');
+//const loginRoutes = require('./routes/login');
 const SignUpRoutes = require('./routes/SignUp');
 
 
@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 
 //router
 app.use("/patient", patientRoutes(db));
-app.use("/login", loginRoutes(db));
+//app.use("/login", loginRoutes(db));
 app.use("/SignUp", SignUpRoutes(db));
 
 // app.get('/', (req, res) => {
