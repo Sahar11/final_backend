@@ -13,16 +13,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const dbHelpers = require('./helpers/dbHelpers')(db);
 const patientRoutes = require('./routes/patients');
-<<<<<<< HEAD
 const labRoutes = require('./routes/lab');
-=======
-//const loginRoutes = require('./routes/login');
-const signUpRoutes = require('./routes/signUp');
-const loginRoutes = require('./routes/login');
-
-
-
->>>>>>> master
 //route import
 const app = express();
 app.use(cors());
@@ -37,17 +28,8 @@ app.use(fileUpload());
 
 //router
 app.use("/patient", patientRoutes(db));
-<<<<<<< HEAD
 app.use("/lab", labRoutes(db, path));
 
-=======
-app.use("/login", loginRoutes(db));
-app.use("/SignUp", signUpRoutes(db));
-
-// app.get('/', (req, res) => {
-// 	res.json({greetings: 'hello world'});
-// });
->>>>>>> master
 
 app.get('/', async (req, res) => {
   try {
