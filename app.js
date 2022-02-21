@@ -16,6 +16,7 @@ const reportRoutes = require('./routes/report')
 //const loginRoutes = require('./routes/login');
 const signUpRoutes = require('./routes/signUp');
 const loginRoutes = require('./routes/login');
+const labLocationRoutes = require('./routes/labLocation')
 //const pino = require('express-pino-logger')();
 const client = require('twilio')(
   process.env.TWILIO_ACCOUNT_SID,
@@ -38,13 +39,13 @@ app.use(bodyParser.json());
 const images = './public/images/';
 app.use(express.static('public/images'))
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 //app.use(pino);
 
 //router
 app.use("/report", reportRoutes(db));
 app.use("/patient", patientRoutes(db));
 app.use("/lab", labRoutes(db, path));
+app.use("/location", labLocationRoutes(db));
 // app.get('/', (req, res) => {
 // 	res.json({greetings: 'hello world'});
 // });
