@@ -3,7 +3,10 @@ DROP TABLE IF EXISTS appointments CASCADE;
 
 CREATE TABLE appointments (
   id SERIAL PRIMARY KEY,
-  patient_id integer REFERENCES patients(id) ON DELETE CASCADE NOT NULL,
+  firstName VARCHAR(50) NOT NULL,
+  lastName VARCHAR(50) NOT NULL,
+  phoneNumber VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL,
   location_id integer REFERENCES locations(id) ON DELETE CASCADE NOT NULL,
   appointment_date DATE,
   appointment_time TIME
