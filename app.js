@@ -8,7 +8,6 @@ const cors = require('cors');
 const { ENVIROMENT, PORT } = process.env;
 const express = require('express');
 const fileUpload = require('express-fileupload');
-const path = require("path");
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -24,20 +23,23 @@ const client = require('twilio')(
   process.env.TWILIO_AUTH_TOKEN
 );
 
+const app = express();
+app.use(bodyParser.json());
+app.use(fileUpload());
+app.use(cors());
 
 const dbHelpers = require('./helpers/dbHelpers')(db);
 const labRoutes = require('./routes/lab');
 const bookingRoutes = require('./routes/booking');
 //route import
-const app = express();
-app.use(cors());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
 // middleware setup
 app.use(morgan(ENVIROMENT));
-app.use(bodyParser.json());
+
 const images = './public/images/';
 app.use(express.static('public/images'))
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -51,7 +53,7 @@ app.use("/location", labLocationRoutes(db));
 // app.get('/', (req, res) => {
 // 	res.json({greetings: 'hello world'});
 // });
-app.use(fileUpload());
+
 
 
 
