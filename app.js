@@ -5,7 +5,7 @@ const connectionString = process.env.CONNECTION_STRING
 const pgp = require("pg-promise")()
 const db = pgp(connectionString)
 const cors = require('cors');
-const {ENVIROMENT, PORT} = process.env;
+const { ENVIROMENT, PORT } = process.env;
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -27,17 +27,23 @@ app.use(express.static('public/images'))
 app.use("/patient", patientRoutes());
 app.use("/report", reportRoutes(db));
 app.use("/location", locationRoutes(db));
-// app.get('/', (req, res) => {
-// 	res.json({greetings: 'hello world'});
-// });
 
+
+
+app.post('/checkin', async (req, res) => {
+  const { firstName, lastName, phoneNumber, locationID } = req.body;
+  try {
+  //twilio code here
+  } catch (err) {
+    console.log(err);
+  }
+});
 app.get('/', async (req, res) => {
   try {
-
-      const results = await db.query('SELECT * FROM patients');
-      res.json(results);
+    const results = await db.query('SELECT * FROM patients');
+    res.json(results);
   } catch (err) {
-      console.log(err);
+    console.log(err);
   }
 });
 
