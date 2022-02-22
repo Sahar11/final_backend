@@ -12,12 +12,11 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
 const patientRoutes = require('./routes/patients');
-const reportRoutes = require('./routes/report')
-//const loginRoutes = require('./routes/login');
+const reportRoutes = require('./routes/report');
 const signUpRoutes = require('./routes/signUp');
 const loginRoutes = require('./routes/login');
 const labLocationRoutes = require('./routes/labLocation')
-//const pino = require('express-pino-logger')();
+
 const client = require('twilio')(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
@@ -31,8 +30,6 @@ app.use(cors());
 const dbHelpers = require('./helpers/dbHelpers')(db);
 const labRoutes = require('./routes/lab');
 const bookingRoutes = require('./routes/booking');
-//route import
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,22 +40,12 @@ app.use(morgan(ENVIROMENT));
 const images = './public/images/';
 app.use(express.static('public/images'))
 app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(pino);
 
 //router
 app.use("/report", reportRoutes(db));
 app.use("/patient", patientRoutes(db));
 app.use("/lab", labRoutes(db, path));
 app.use("/location", labLocationRoutes(db));
-// app.get('/', (req, res) => {
-// 	res.json({greetings: 'hello world'});
-// });
-
-
-
-
-
-// app.use("/booking", bookingRoutes(db));
 
 app.post('/booking', async (req, res) => {
   const { location, date, time, firstName, lastName, email, phoneNumber } = req.body;

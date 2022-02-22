@@ -1,12 +1,6 @@
 const router = require('express').Router();
-// const {
-//   getReports
-// } = require('../helpers/dbHelpers');
-
 
 module.exports = (db, path) => {
-
-
 
   router.post('/', async (req, res) => {
 
@@ -25,19 +19,18 @@ module.exports = (db, path) => {
         return res.status(500).send(err);
       }
     });
-    const filePath = path.join(__dirname + '/../public', 'images/') + fileName;
+
     try {
       const results = await db.query(
         `INSERT INTO reports (patient_name, patient_healthcard, report, test_type, date) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
         [fullname, health, fileName, test, date]
       );
-   
+
       res.json(results);
     } catch (err) {
       console.log(err);
     }
-    // }
-    //res.end("Submitted the data");
+
   });
 
   return router;
