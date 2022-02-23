@@ -30,6 +30,7 @@ app.use(cors());
 const dbHelpers = require('./helpers/dbHelpers')(db);
 const labRoutes = require('./routes/lab');
 const bookingRoutes = require('./routes/booking');
+const appointmentRoutes = require('./routes/appointment');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,6 +47,7 @@ app.use("/report", reportRoutes(db));
 app.use("/patient", patientRoutes(db));
 app.use("/lab", labRoutes(db, path));
 app.use("/location", labLocationRoutes(db));
+app.use("/appointment", appointmentRoutes(db));
 
 app.post('/booking', async (req, res) => {
   const { location, date, time, firstName, lastName, email, phoneNumber } = req.body;
