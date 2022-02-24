@@ -15,8 +15,8 @@ const patientRoutes = require('./routes/patients');
 const reportRoutes = require('./routes/report');
 const signUpRoutes = require('./routes/signUp');
 const loginRoutes = require('./routes/login');
-const labLocationRoutes = require('./routes/labLocation')
-
+const labLocationRoutes = require('./routes/labLocation');
+const labReportRoute = require('./routes/labReports');
 const client = require('twilio')(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
@@ -48,6 +48,7 @@ app.use("/patient", patientRoutes(db));
 app.use("/lab", labRoutes(db, path));
 app.use("/location", labLocationRoutes(db));
 app.use("/appointment", appointmentRoutes(db));
+app.use('/labReport', labReportRoute(db));
 
 app.post('/booking', async (req, res) => {
   const { location, date, time, firstName, lastName, email, phoneNumber } = req.body;
